@@ -963,16 +963,12 @@
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
       <div class="container" data-aos="fade-up">
-
         <div class="section-header">
           <h2>Contact</h2>
           <p>Nulla dolorum nulla nesciunt rerum facere sed ut inventore quam porro nihil id ratione ea sunt quis dolorem dolore earum</p>
         </div>
-
         <div class="row gx-lg-0 gy-4">
-
           <div class="col-lg-4">
-
             <div class="info-container d-flex flex-column align-items-center justify-content-center">
               <div class="info-item d-flex">
                 <i class="bi bi-geo-alt flex-shrink-0"></i>
@@ -981,7 +977,6 @@
                   <p>A108 Adam Street, New York, NY 535022</p>
                 </div>
               </div><!-- End Info Item -->
-
               <div class="info-item d-flex">
                 <i class="bi bi-envelope flex-shrink-0"></i>
                 <div>
@@ -989,7 +984,6 @@
                   <p>info@example.com</p>
                 </div>
               </div><!-- End Info Item -->
-
               <div class="info-item d-flex">
                 <i class="bi bi-phone flex-shrink-0"></i>
                 <div>
@@ -997,7 +991,6 @@
                   <p>+1 5589 55488 55</p>
                 </div>
               </div><!-- End Info Item -->
-
               <div class="info-item d-flex">
                 <i class="bi bi-clock flex-shrink-0"></i>
                 <div>
@@ -1006,11 +999,9 @@
                 </div>
               </div><!-- End Info Item -->
             </div>
-
           </div>
-
           <div class="col-lg-8">
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+            <form id="contact-form" role="form">
               <div class="row">
                 <div class="col-md-6 form-group">
                   <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
@@ -1030,14 +1021,38 @@
                 <div class="error-message"></div>
                 <div class="sent-message">Your message has been sent. Thank you!</div>
               </div>
-              <div class="text-center"><button type="submit">Send Message</button></div>
+              <div class="text-center"><button type="submit" id="submit-btn">Send Message</button></div>
             </form>
           </div><!-- End Contact Form -->
-
         </div>
-
       </div>
     </section><!-- End Contact Section -->
+
+    <script>
+      document.getElementById("contact-form").addEventListener("submit", function(event) {
+        event.preventDefault();
+        var formData = new FormData(this);
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "https://fdhlhhmd.github.io/ssdm/", true);
+        xhr.onload = function() {
+          if (xhr.status === 200) {
+            // Success message
+            document.getElementById("contact-form").reset();
+            document.querySelector(".sent-message").style.display = "block";
+          } else {
+            // Error message
+            document.querySelector(".error-message").innerText = "Error: " + xhr.statusText;
+            document.querySelector(".error-message").style.display = "block";
+          }
+        };
+        xhr.onerror = function() {
+          // Error message
+          document.querySelector(".error-message").innerText = "Request failed";
+          document.querySelector(".error-message").style.display = "block";
+        };
+        xhr.send(formData);
+      });
+    </script>
 
   </main><!-- End #main -->
 
